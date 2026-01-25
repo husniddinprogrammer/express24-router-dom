@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { Navbar } from "react-bootstrap";
-import { PersonCircle, List } from "react-bootstrap-icons";
+import { PersonCircle, List, BoxArrowRight } from "react-bootstrap-icons";
+import { useContext } from "react";
+import { LoginContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const HeaderBar = styled(Navbar)`
   background: #ffffff;
@@ -18,13 +21,42 @@ const User = styled.div`
   font-weight: 500;
 `;
 
+const LogoutButton = styled.button`
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(220, 53, 69, 0.1);
+    color: red;
+  }
+`;
+
 export default function Header() {
+  const { setLogin } = useContext(LoginContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setLogin(false);
+    navigate("/login");
+  };
+
   return (
     <HeaderBar>
       <List size={22} />
       <User>
         <PersonCircle size={22} />
         Axror
+        <LogoutButton onClick={handleLogout}>
+          <BoxArrowRight size={22} />
+        </LogoutButton>
       </User>
     </HeaderBar>
   );
