@@ -19,12 +19,13 @@ function App() {
 
             <Route path="/login" element={<Login />} />
 
-            {isLogin && <Route path="/" element={<MainSection></MainSection>}>
+            {isLogin && <Route path="/" element={<MainSection />}>
               <Route path="orders" element={<OrdersPage />} />
               <Route path="delivered" element={<Delivered />} />
               <Route path="people" element={<People />} />
               <Route path="add" element={<AddPage />} />
             </Route>}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </LoginContext.Provider>
       </BrowserRouter>
