@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Table } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { deleteUser, changeStatus } from "../../redux/actions/usersAction";
 
 const Wrapper = styled.div`
   margin-bottom: 24px;
@@ -53,7 +55,16 @@ const Footer = styled.div`
 
 
 export default function People() {
-  const mainData = useSelector(state => state.mainData);
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.users.users);
+
+  const handleDeleteUser = (id) => {
+    dispatch(deleteUser(id));
+  };
+
+  const handleChangeStatus = (id) => {
+    dispatch(changeStatus(id));
+  };
 
   return (
     <Wrapper>
@@ -68,20 +79,32 @@ export default function People() {
             <th>To‘liq ismi</th>
             <th>Telefon raqami</th>
             <th>Roll</th>
+            <th>Status</th>
             <th></th>
           </tr>
         </thead>
 
         <tbody>
-          {mainData.map((order) => (
-            <tr key={order.id}>
-              <td>{order.id}</td>
-              <td>{order.customerName}</td>
-              <td>{order.phone}</td>
-              <td>{order.roll}</td>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.customerName}</td>
+              <td>{user.phone}</td>
+              <td>{user.roll}</td>
+              <td>{user.status ? 'Faol' : 'Faol emas'}</td>
               <td>
-                <Pencil size={16} color="#6c757d" style={{cursor: 'pointer', marginRight: '8px'}} />
-                <Trash size={16} color="#dc3545" style={{cursor: 'pointer'}} />
+                <Pencil 
+                  size={16} 
+                  color="#6c757d" 
+                  style={{cursor: 'pointer', marginRight: '8px'}} 
+                  onClick={() => handleChangeStatus(user.id)}
+                />
+                <Trash 
+                  size={16} 
+                  color="#dc3545" 
+                  style={{cursor: 'pointer'}} 
+                  onClick={() => handleDeleteUser(user.id)} 
+                />
               </td>
             </tr>
           ))}
@@ -90,7 +113,7 @@ export default function People() {
 
       <Footer>
         <span>Jami</span>
-        <span>{mainData.length} ta foydalanuvchi</span>
+        <span>{users.length} ta foydalanuvchi</span>
       </Footer>
     </Wrapper>
   );

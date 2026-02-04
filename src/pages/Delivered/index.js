@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Trash } from "react-bootstrap-icons";
+import { deleteOrder } from "../../redux/actions/ordersAction";
 
 const Wrapper = styled.div`
   margin-bottom: 24px;
@@ -52,7 +54,13 @@ const Footer = styled.div`
 
 
 export default function Delivered() {
-  const mainData = useSelector(state => state.mainData);
+  const dispatch = useDispatch();
+  const mainData = useSelector(state => state.orders.mainData);
+
+  const handleDeleteOrder = (id) => {
+    dispatch(deleteOrder(id));
+  };
+
   return (
     <Wrapper>
       <Title>Yetkazilgan</Title>
@@ -70,6 +78,7 @@ export default function Delivered() {
             <th>Umumiy narx</th>
             <th>Telefon raqami</th>
             <th>Yetkazilgan</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -84,6 +93,14 @@ export default function Delivered() {
               <td>{order.total.toLocaleString()}</td>
               <td>{order.phone}</td>
               <td>yetkazilgan</td>
+              <td>
+                <Trash
+                  size={16}
+                  color="#dc3545"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleDeleteOrder(order.id)}
+                />
+              </td>
             </tr>
           ))}
         </tbody>

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { Plus, Image, TextRight, Justify } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
@@ -107,7 +106,7 @@ const Submit = styled(Button)`
 `;
 
 export default function FoodForm() {
-  const mainData = useSelector(state => state.categories);
+  const mainData = useSelector(state => state.orders.categories);
   return (
     <Wrapper>
       

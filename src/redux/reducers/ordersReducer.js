@@ -74,16 +74,21 @@ const initialState = {
     users: [],
 };
 
-const reducer = (state = initialState, action) => {
+const ordersReducer = (state = initialState, action) => {
     switch (action.type) {
         case "CATEGORY_ADD":
             return {
                 ...state,
                 categories: [...state.categories, action.payload]
             };
+        case "DELETE_ORDER":
+            return {
+                ...state,
+                mainData: state.mainData.filter(order => order.id !== action.payload)
+            };
         default:
             return state;
     }
 };
 
-export default reducer;
+export default ordersReducer;

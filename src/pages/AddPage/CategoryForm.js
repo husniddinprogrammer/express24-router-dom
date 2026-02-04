@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { Plus } from "react-bootstrap-icons";
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { categoryAdd } from '../../redux/actions';
+import { categoryAdd } from '../../redux/actions/ordersAction';
 
 const Wrapper = styled.div`
   max-width: 600px;

@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { Form } from "react-bootstrap";
 import { Person, Lock } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { LoginContext } from "../../App";
-
+import {login} from "../../redux/actions/loginAction";
+import { useDispatch } from "react-redux";
+ 
 const Title = styled.h4`
   text-align: center;
   font-weight: 600;
@@ -57,8 +57,9 @@ const Button = styled.button`
 `;
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLogin, setLogin } = useContext(LoginContext);
+
   return (
     <>
       <Title>Login</Title>
@@ -80,7 +81,7 @@ export default function LoginForm() {
       </Group>
 
       <Button onClick={() => {
-        setLogin(true);
+        dispatch(login());
         navigate("/");
       }}>LOGIN</Button>
     </>

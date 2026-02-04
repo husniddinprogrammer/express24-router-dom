@@ -1,5 +1,6 @@
 export const CATEGORY_ADD = "CATEGORY_ADD";
-export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
-export const GET_ALL_USERS = "GET_ALL_USERS";
-export const GET_ALL_CATEGORY = "GET_ALL_CATEGORY";
-export const GET_ALL_DELIVIRED = "GET_ALL_DELIVIRED";
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
+export const DELETE_ORDER = "DELETE_ORDER";
+export const DELETE_USER = "DELETE_USER";
+export const CHANGE_STATUS = "CHANGE_STATUS";

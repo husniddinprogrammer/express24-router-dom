@@ -4,7 +4,8 @@ import { PersonCircle, List, BoxArrowRight } from "react-bootstrap-icons";
 import { useContext } from "react";
 import { LoginContext } from "../../App";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/actions/loginAction";
 
 const HeaderBar = styled(Navbar)`
   background: #ffffff;
@@ -41,11 +42,11 @@ const LogoutButton = styled.button`
 `;
 
 export default function Header() {
-  const { setLogin } = useContext(LoginContext);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    setLogin(false);
+    dispatch(logout());
     navigate("/login");
   };
   const state = useSelector((state) => state);

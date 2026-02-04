@@ -6,17 +6,15 @@ import People from "./pages/People";
 import AddPage from "./pages/AddPage";
 import Login from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
-import { createContext, useState } from "react";
+import { useSelector } from "react-redux";
 
-export const LoginContext = createContext({ isLogin: false, setLogin: () => { } });
 
 function App() {
-  const [isLogin, setLogin] = useState(false);
+  const isLogin = useSelector(state => state.login.isLogin);
+
   return (
       <BrowserRouter>
-        <LoginContext.Provider value={{ isLogin, setLogin }}>
-          <Routes>
-
+        <Routes>
             <Route path="/login" element={<Login />} />
 
             {isLogin && <Route path="/" element={<MainSection />}>
@@ -27,7 +25,6 @@ function App() {
             </Route>}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </LoginContext.Provider>
       </BrowserRouter>
   );
 }
