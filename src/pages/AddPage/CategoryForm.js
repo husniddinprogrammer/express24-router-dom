@@ -74,9 +74,7 @@ export default function CategoryForm() {
   const [categoryName, setCategoryName] = useState('');
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
+  const handleAddCategory = () => {
     if (categoryName.trim()) {
       const newCategory = {
         id: Date.now(), //yagona id bo'lishi ichun
@@ -97,23 +95,25 @@ export default function CategoryForm() {
         Yangi kategoriya nomini kiriting
       </Description>
       
-      <Form onSubmit={handleSubmit}>
-        <StyledInput
-          type="text"
-          placeholder="Kategoriya nomi"
-          size="lg"
-          value={categoryName}
-          onChange={(e) => setCategoryName(e.target.value)}
-          required
-        />
+      <StyledInput
+        type="text"
+        placeholder="Kategoriya nomi"
+        size="lg"
+        value={categoryName}
+        onChange={(e) => setCategoryName(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') {
+            handleAddCategory();
+          }
+        }}
+      />
 
-        <div style={{ display: 'flex', justifyContent: 'center'}}>
-          <Submit type="submit">
-            <Plus size={20} />
-            Qo'shish
-          </Submit>
-        </div>
-      </Form>
+      <div style={{ display: 'flex', justifyContent: 'center'}}>
+        <Submit onClick={handleAddCategory}>
+          <Plus size={20} />
+          Qo'shish
+        </Submit>
+      </div>
     </Wrapper>
   );
 }
