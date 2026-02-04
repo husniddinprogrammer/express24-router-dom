@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Table } from "react-bootstrap";
-import { ordersData } from "../../data/ordersData";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   margin-bottom: 24px;
@@ -52,6 +52,7 @@ const Footer = styled.div`
 
 
 export default function Delivered() {
+  const mainData = useSelector(state => state.mainData);
   return (
     <Wrapper>
       <Title>Yetkazilgan</Title>
@@ -73,7 +74,7 @@ export default function Delivered() {
         </thead>
 
         <tbody>
-          {ordersData.filter(order => order.delivered).map((order) => (
+          {mainData.filter(order => order.delivered).map((order) => (
             <tr key={order.id}>
               <td>{order.id}</td>
               <td>{order.customerName}</td>
@@ -90,7 +91,7 @@ export default function Delivered() {
 
       <Footer>
         <span>Jami</span>
-        <span>{ordersData.filter(order => order.delivered).reduce((sum, order) => sum + order.total, 0).toLocaleString()} so'm</span>
+        <span>{mainData.filter(order => order.delivered).reduce((sum, order) => sum + order.total, 0).toLocaleString()} so'm</span>
       </Footer>
     </Wrapper>
   );

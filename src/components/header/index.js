@@ -4,6 +4,7 @@ import { PersonCircle, List, BoxArrowRight } from "react-bootstrap-icons";
 import { useContext } from "react";
 import { LoginContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const HeaderBar = styled(Navbar)`
   background: #ffffff;
@@ -47,6 +48,9 @@ export default function Header() {
     setLogin(false);
     navigate("/login");
   };
+  const state = useSelector((state) => state);
+  console.log(state);
+  
 
   return (
     <HeaderBar>

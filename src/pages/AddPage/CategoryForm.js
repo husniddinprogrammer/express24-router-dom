@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { Form, Button } from "react-bootstrap";
+import { Plus } from "react-bootstrap-icons";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { categoryAdd } from '../../redux/actions';
 
 const Wrapper = styled.div`
   max-width: 600px;
@@ -10,6 +14,18 @@ const Wrapper = styled.div`
   border: 1px solid #e9ecef;
 `;
 
+const Title = styled.h4`
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2d3436;
+`;
+
+const Description = styled.p`
+  font-size: 14px;
+  color: #636e72;
+  margin-bottom: 32px;
+`;
+
 
 const StyledInput = styled(Form.Control)`
   border: 2px solid #e9ecef;
@@ -18,13 +34,13 @@ const StyledInput = styled(Form.Control)`
   font-size: 15px;
   transition: all 0.3s ease;
   width: 100%;
-  
+
   &:focus {
     border-color: #ffe600;
     box-shadow: 0 0 0 0.2rem rgba(255, 230, 0, 0.25);
     outline: none;
   }
-  
+
   &::placeholder {
     color: #adb5bd;
   }
@@ -48,25 +64,56 @@ const Submit = styled(Button)`
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 230, 0, 0.3);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
 `;
 
 export default function CategoryForm() {
+  const [categoryName, setCategoryName] = useState('');
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (categoryName.trim()) {
+      const newCategory = {
+        id: Date.now(), //yagona id bo'lishi ichun
+        name: categoryName.trim()
+      };
+      
+      dispatch(categoryAdd(newCategory));
+      setCategoryName('');
+      
+      alert('Kategoriya muvaffaqiyatli qo`shildi!');
+    }
+  };
+
   return (
-    <>
+    <Wrapper>
+      <Title>Kategoriya qo'shish</Title>
+      <Description>
+        Yangi kategoriya nomini kiriting
+      </Description>
+      
+      <Form onSubmit={handleSubmit}>
         <StyledInput
+          type="text"
           placeholder="Kategoriya nomi"
           size="lg"
+          value={categoryName}
+          onChange={(e) => setCategoryName(e.target.value)}
+          required
         />
 
         <div style={{ display: 'flex', justifyContent: 'center'}}>
-          <Submit>
+          <Submit type="submit">
+            <Plus size={20} />
             Qo'shish
           </Submit>
         </div>
-    </>
+      </Form>
+    </Wrapper>
   );
 }

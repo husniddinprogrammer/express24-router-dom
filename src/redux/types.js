@@ -1,0 +1,5 @@
+export const CATEGORY_ADD = "CATEGORY_ADD";
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const GET_ALL_CATEGORY = "GET_ALL_CATEGORY";
+export const GET_ALL_DELIVIRED = "GET_ALL_DELIVIRED";

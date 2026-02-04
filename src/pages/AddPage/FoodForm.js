@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Plus, Image, TextRight, Justify } from "react-bootstrap-icons";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   max-width: 800px;
@@ -106,6 +107,7 @@ const Submit = styled(Button)`
 `;
 
 export default function FoodForm() {
+  const mainData = useSelector(state => state.categories);
   return (
     <Wrapper>
       
@@ -140,12 +142,12 @@ export default function FoodForm() {
         </Col>
         <Col>
           <StyledSelect>
-            <option value="">Kategoriyani tanlang</option>
-            <option value="osh">Osh</option>
-            <option value="manti">Manti</option>
-            <option value="lavash">Lavash</option>
-            <option value="shashlik">Shashlik</option>
-            <option value="salad">Salat</option>
+            {mainData.map(category => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
+            
           </StyledSelect>
         </Col>
       </Row>

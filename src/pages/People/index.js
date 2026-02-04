@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Table } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
-import { ordersData } from "../../data/ordersData";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   margin-bottom: 24px;
@@ -53,6 +53,8 @@ const Footer = styled.div`
 
 
 export default function People() {
+  const mainData = useSelector(state => state.mainData);
+
   return (
     <Wrapper>
       <Title>Foydalanuvchilar</Title>
@@ -71,7 +73,7 @@ export default function People() {
         </thead>
 
         <tbody>
-          {ordersData.map((order) => (
+          {mainData.map((order) => (
             <tr key={order.id}>
               <td>{order.id}</td>
               <td>{order.customerName}</td>
@@ -88,7 +90,7 @@ export default function People() {
 
       <Footer>
         <span>Jami</span>
-        <span>{ordersData.length} ta foydalanuvchi</span>
+        <span>{mainData.length} ta foydalanuvchi</span>
       </Footer>
     </Wrapper>
   );
